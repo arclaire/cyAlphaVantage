@@ -21,7 +21,7 @@ class WfScreen1: NSObject {
     func initiateVC() -> VCScreen1 {
         let storyboard = UIStoryboard.getMainStoryboard()
         let viewController = storyboard.instantiateViewController(withIdentifier: ID_VC_SCREEN1) as! VCScreen1
-        //viewController.eventHandler = self.presenter
+        viewController.presenter = self.presenter
         self.presenter?.vc = viewController
         return viewController
     }

@@ -14,12 +14,17 @@ class VCScreen1: UIViewController {
     @IBOutlet weak var btnCompare: UIButton!
     @IBOutlet weak var btnSettings: UIButton!
     
+    @IBOutlet weak var viewBlur: UIVisualEffectView!
     @IBOutlet weak var table: UITableView!
     
+    @IBOutlet weak var tableSearch: UITableView!
+    
+    @IBOutlet weak var activity: UIActivityIndicatorView!
     var presenter: PScreen1?
     override func viewDidLoad() {
         super.viewDidLoad()
         self.searchBar.delegate = self
+        self.presenter?.fetchDefaultData(strSymbol: "IBM")
         // Do any additional setup after loading the view.
     }
     @IBAction func actionButton(_ sender: Any) {
@@ -38,8 +43,29 @@ class VCScreen1: UIViewController {
         self.table.contentInsetAdjustmentBehavior = .never
         self.table.contentOffset = CGPoint.zero
         
+        let nibToRegister2 = UINib(nibName: String(describing: CellTableSearchSymbol.self), bundle: nil)
+        self.tableSearch.register(nibToRegister2, forCellReuseIdentifier: String(describing: CellTableSearchSymbol.self))
+      
+       
+        self.tableSearch.delegate = self
+        self.tableSearch.dataSource = self
+        self.tableSearch.separatorStyle = UITableViewCell.SeparatorStyle.singleLine
+        self.tableSearch.separatorInset = .zero
+      
+        self.tableSearch.contentOffset = CGPoint.zero
+        self.tableSearch.isHidden = true
+        
     }
 
+    func displayLoading(isLoading: Bool) {
+        if isLoading {
+            self.viewBlur.isHidden = false
+            self.activity.startAnimating()
+        } else {
+            self.viewBlur.isHidden = true
+            self.activity.stopAnimating()
+        }
+    }
     
 }
 

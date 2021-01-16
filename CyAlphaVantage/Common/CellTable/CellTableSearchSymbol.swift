@@ -1,18 +1,20 @@
 //
-//  CellTableSingleInfo.swift
+//  CellTableSearchSymbol.swift
 //  CyAlphaVantage
 //
-//  Created by Lucy on 15/01/21.
+//  Created by Lucy on 17/01/21.
 //
 
 import UIKit
 
-class CellTableSingleInfo: UITableViewCell {
+class CellTableSearchSymbol: UITableViewCell {
 
+    @IBOutlet weak var labelSymbolDetail: UILabel!
+    @IBOutlet weak var labelSymbol: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
         self.selectionStyle = .none
+        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
