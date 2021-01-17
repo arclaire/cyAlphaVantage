@@ -26,28 +26,34 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ule-6c-gpJ" userLabel="labelHour">
+                                <rect key="frame" x="10" y="5" width="301" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.14901960780000001" green="0.14901960780000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Open" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JO4-RZ-z4L" userLabel="labelTitleOpen">
-                                <rect key="frame" x="15" y="39" width="33" height="16"/>
+                                <rect key="frame" x="30" y="39" width="33" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" red="0.14901960780000001" green="0.14901960780000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="High" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nTZ-Jr-vCJ" userLabel="labelTitleHigh">
                                 <rect key="frame" x="146.5" y="39" width="28.5" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" red="0.14901960780000001" green="0.14901960780000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Low" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CAn-PX-IEg" userLabel="labelTitleLow">
-                                <rect key="frame" x="281.5" y="39" width="24.5" height="16"/>
+                                <rect key="frame" x="266.5" y="39" width="24.5" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" red="0.14901960780000001" green="0.14901960780000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gnm-ly-80h" userLabel="labelOpen">
-                                <rect key="frame" x="26.5" y="63" width="10" height="17"/>
+                                <rect key="frame" x="41.5" y="59" width="10" height="17"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" red="0.14901960780000001" green="0.14901960780000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lBA-Oy-5Co" userLabel="labelHigh">
@@ -57,9 +63,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w0T-0a-YST" userLabel="labelLow">
-                                <rect key="frame" x="289" y="59" width="10" height="17"/>
+                                <rect key="frame" x="274" y="59" width="10" height="17"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" red="0.14901960780000001" green="0.14901960780000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -68,17 +74,21 @@
                             <constraint firstItem="lBA-Oy-5Co" firstAttribute="top" secondItem="nTZ-Jr-vCJ" secondAttribute="bottom" constant="4" id="1Fv-qA-UoM"/>
                             <constraint firstItem="gnm-ly-80h" firstAttribute="centerX" secondItem="JO4-RZ-z4L" secondAttribute="centerX" id="3WH-pi-Cn7"/>
                             <constraint firstItem="nTZ-Jr-vCJ" firstAttribute="top" secondItem="8cc-a6-ReF" secondAttribute="bottom" constant="18" id="4af-nQ-ehZ"/>
-                            <constraint firstItem="gnm-ly-80h" firstAttribute="top" secondItem="JO4-RZ-z4L" secondAttribute="bottom" constant="8" symbolic="YES" id="CCk-Ws-AJS"/>
+                            <constraint firstItem="gnm-ly-80h" firstAttribute="top" secondItem="JO4-RZ-z4L" secondAttribute="bottom" constant="4" id="CCk-Ws-AJS"/>
                             <constraint firstItem="JO4-RZ-z4L" firstAttribute="top" secondItem="nTZ-Jr-vCJ" secondAttribute="top" id="JTE-9y-ZoQ"/>
+                            <constraint firstItem="ule-6c-gpJ" firstAttribute="trailing" secondItem="8cc-a6-ReF" secondAttribute="trailing" id="Kpg-lJ-GLT"/>
+                            <constraint firstItem="ule-6c-gpJ" firstAttribute="leading" secondItem="8cc-a6-ReF" secondAttribute="leading" id="QuG-zm-Hpi"/>
                             <constraint firstAttribute="trailing" secondItem="8cc-a6-ReF" secondAttribute="trailing" constant="10" id="TWE-Ot-st6"/>
-                            <constraint firstAttribute="trailing" secondItem="CAn-PX-IEg" secondAttribute="trailing" constant="15" id="UN1-ui-kR0"/>
+                            <constraint firstAttribute="trailing" secondItem="CAn-PX-IEg" secondAttribute="trailing" constant="30" id="UN1-ui-kR0"/>
                             <constraint firstItem="8cc-a6-ReF" firstAttribute="leading" secondItem="x12-TB-Rdz" secondAttribute="leading" constant="10" id="WUu-Cb-F6W"/>
+                            <constraint firstItem="ule-6c-gpJ" firstAttribute="top" secondItem="8cc-a6-ReF" secondAttribute="top" id="bDM-hF-Y3M"/>
                             <constraint firstItem="CAn-PX-IEg" firstAttribute="top" secondItem="nTZ-Jr-vCJ" secondAttribute="top" id="gbb-fY-6Ek"/>
-                            <constraint firstItem="JO4-RZ-z4L" firstAttribute="leading" secondItem="x12-TB-Rdz" secondAttribute="leading" constant="15" id="hmy-vK-bX5"/>
+                            <constraint firstItem="JO4-RZ-z4L" firstAttribute="leading" secondItem="x12-TB-Rdz" secondAttribute="leading" constant="30" id="hmy-vK-bX5"/>
                             <constraint firstItem="nTZ-Jr-vCJ" firstAttribute="centerX" secondItem="x12-TB-Rdz" secondAttribute="centerX" id="o2C-GP-ERo"/>
                             <constraint firstItem="w0T-0a-YST" firstAttribute="top" secondItem="CAn-PX-IEg" secondAttribute="bottom" constant="4" id="oSR-sD-FAr"/>
                             <constraint firstItem="w0T-0a-YST" firstAttribute="centerX" secondItem="CAn-PX-IEg" secondAttribute="centerX" id="qlf-1q-7uO"/>
                             <constraint firstItem="lBA-Oy-5Co" firstAttribute="centerX" secondItem="nTZ-Jr-vCJ" secondAttribute="centerX" id="qtB-RZ-j9I"/>
+                            <constraint firstItem="ule-6c-gpJ" firstAttribute="bottom" secondItem="8cc-a6-ReF" secondAttribute="bottom" id="rey-fh-xEN"/>
                             <constraint firstItem="8cc-a6-ReF" firstAttribute="top" secondItem="x12-TB-Rdz" secondAttribute="top" constant="5" id="s4b-sv-GN2"/>
                         </constraints>
                     </view>
@@ -91,6 +101,13 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="labelDate" destination="8cc-a6-ReF" id="5bc-yY-vFX"/>
+                <outlet property="labelHour" destination="ule-6c-gpJ" id="Rla-nr-CrF"/>
+                <outlet property="labelValueHigh" destination="lBA-Oy-5Co" id="5ip-4s-R5v"/>
+                <outlet property="labelValueLow" destination="w0T-0a-YST" id="O9Z-X2-Zwk"/>
+                <outlet property="labelValueOpen" destination="gnm-ly-80h" id="QM9-Rn-kMs"/>
+            </connections>
             <point key="canvasLocation" x="132.60869565217394" y="111.49553571428571"/>
         </tableViewCell>
     </objects>

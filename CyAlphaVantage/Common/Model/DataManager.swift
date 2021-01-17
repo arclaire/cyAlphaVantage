@@ -65,7 +65,7 @@ class DataManager {
     }
     
     func loadAPIKEY() -> String {
-        var strAPIKEY = "9N17L75CVNEUKV3R"
+        var strAPIKEY = "M6REICQY80LJ6CCT"//"9N17L75CVNEUKV3R"
         if let receivedData = self.keyLoad(key: KEYCHAIN_APIKEY) {
             let result = receivedData.to(type: String.self)
             strAPIKEY = result

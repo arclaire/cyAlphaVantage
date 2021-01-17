@@ -23,4 +23,9 @@ class CellTableSearchSymbol: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func displayData(data:ModelSymbol) {
+        self.labelSymbol.text = data.symbol
+        self.labelSymbolDetail.text = data.name
+    }
+    
 }

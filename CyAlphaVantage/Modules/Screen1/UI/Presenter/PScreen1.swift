@@ -9,73 +9,44 @@ import Foundation
 import UIKit
 
 class PScreen1: NSObject {
+    var arrModel: [ModelSymbolDetail] = [ModelSymbolDetail]()
+    
     var wfVc: WfScreen1?
     
-    var model: ModelSymbol?
+    var arrSymbol: ModelSearchResult = ModelSearchResult()
     var interactor: IScreen1?
     var vc: VCScreen1?
     
-    let heightTableRow: CGFloat = 50.0
+    let heightTableRow: CGFloat = 100.0
+    let heightTableSearch: CGFloat = 70.0
     
-    func configureURL(str: String) -> String {
-        //https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=5min&outputsize=full&apikey=demo
-        //https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=IBM&outputsize=full&apikey=demo
-        var strUrl = "https://www.alphavantage.co/query?"
-        
-        let param = DataManager.shared.getFunctionType()
-        strUrl = strUrl + param
-        
-        let paramSymbol = str
-        strUrl = strUrl + "&symbol=" + paramSymbol
-        
-        let paramOutput = DataManager.shared.getFunctionOutputSize()
-        strUrl = strUrl + "&outputsize=" + paramOutput
-        
-        if !DataManager.shared.isDaily {
-            strUrl = strUrl + "&interval=" + DataManager.shared.getFunctionInterval()
-        }
-        
-        strUrl = strUrl + "&apikey=" + DataManager.shared.loadAPIKEY()
-        return strUrl
-    }
-    
-    func fetchDefaultData(strSymbol: String) {
-        print("Fetching Data", self.configureURL(str: strSymbol))
+    func loadDataSymbolDetail(str: String) {
+        self.arrModel.removeAll()
         self.vc?.displayLoading(isLoading: true)
-        guard let url = URL(string: self.configureURL(str: strSymbol)) else {
-            return
-        }
-        
-        return
-        let request = URLRequest(url: url)
-        let task = URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) -> Void in
-            
-            if let error = error {
-                print(error)
-                return
-            }
-            
-            // Parse JSON data
-            if let data = data {
-                do {
-                    let jsonResult = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers) as? NSDictionary
-                    
-                    print("data", jsonResult)
-                } catch {
-                    print(error)
-                }
-                
-                
-                // Reload table view
-                OperationQueue.main.addOperation({
-                    print("RETRIEVE DATA DONE")
-                    self.vc?.displayLoading(isLoading: false)
-                    
-                })
+        self.interactor?.fetchDefaultData(strSymbol: str, completionHandler: { (model) -> Void in
+            self.vc?.displayLoading(isLoading: false)
+            if model.count > 0 {
+                self.arrModel = model
+                self.vc?.reloadUI()
             }
         })
-        
-        task.resume()
     }
-     
+    
+    func loadSearch(str: String) {
+        self.vc?.displayLoadingSearch(isLoading: true)
+        self.interactor?.fetchSearchData(str: str, completionHandler: { (model) -> Void in
+            self.arrSymbol = model
+            self.vc?.displayLoadingSearch(isLoading: false)
+            self.vc?.reloadUISearch()
+        })
+       
+    }
+    
+    func navigateToCompare() {
+        self.wfVc?.navigateToScreen2(model1: self.arrModel)
+    }
+    
+    func navigateToSettings() {
+        self.wfVc?.navigateToScreen3()
+    }
 }
