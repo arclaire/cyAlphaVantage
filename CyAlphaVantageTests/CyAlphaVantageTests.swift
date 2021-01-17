@@ -29,5 +29,46 @@ class CyAlphaVantageTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
+    
+    func testCallFetchSearchSymbol() {
+        let interactor = IScreen1()
+        let str = "IBM"
+        interactor.fetchSearchData(str: str, completionHandler: { (model) -> Void in
+            if let _ =  model.bestMatches {
+                XCTAssert(true, "Call API success and retrieve response with valid model")
+                
+            } else {
+                XCTAssert(false, "Model not retrieve")
+            }
+        })
+            
+    }
+    
+    func testCallFetchSymbolDetail() {
+        let interactor = IScreen1()
+        let str = "IBM"
+        interactor.fetchDefaultData(strSymbol: str, completionHandler: { (model) -> Void in
+            if model.count > 0 {
+                XCTAssert(true, "Call API success and retrieve response with valid model")
+                
+            } else {
+                XCTAssert(false, "Model not retrieve")
+            }
+        })
+    }
+    
+    func testDataSave() {
+        let strInterval = "10mins"
+        DataManager.shared.saveInterval(str: strInterval)
+        XCTAssert(true, "Save Interval to user default")
+    }
 
+    func testDataLoad() {
+        let strload = DataManager.shared.getFunctionInterval()
+        if strload.count > 0 {
+            XCTAssert(true, "Load Data Success")
+        } else {
+            XCTAssert(false, "No Data")
+        }
+    }
 }
