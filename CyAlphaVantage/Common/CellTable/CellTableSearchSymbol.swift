@@ -8,12 +8,11 @@
 import UIKit
 
 class CellTableSearchSymbol: UITableViewCell {
-
-    @IBOutlet weak var labelSymbolDetail: UILabel!
-    @IBOutlet weak var labelSymbol: UILabel!
+    @IBOutlet var labelSymbolDetail: UILabel!
+    @IBOutlet var labelSymbol: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.selectionStyle = .none
+        selectionStyle = .none
         // Initialization code
     }
 
@@ -22,10 +21,9 @@ class CellTableSearchSymbol: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
-    func displayData(data:ModelSymbol) {
-        self.labelSymbol.text = data.symbol
-        self.labelSymbolDetail.text = data.name
+
+    func displayData(data: ModelSymbol) {
+        labelSymbol.text = data.symbol
+        labelSymbolDetail.text = data.name
     }
-    
 }

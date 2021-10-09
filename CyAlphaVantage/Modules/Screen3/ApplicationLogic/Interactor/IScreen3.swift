@@ -6,6 +6,4 @@
 //
 
 import Foundation
-class IScreen3: NSObject {
-    
-}
+class IScreen3: NSObject {}

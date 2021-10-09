@@ -9,121 +9,114 @@ import UIKit
 
 class VCScreen3: UIViewController {
     var presenter: PScreen3?
-    @IBOutlet weak var picker: UIPickerView!
-    @IBOutlet weak var btnInterval: UIButton!
-    @IBOutlet weak var tfApiKey: UITextField!
-    
-    @IBOutlet weak var labelInfo: UILabel!
-    @IBOutlet weak var btnFunctionType: UIButton!
-    
-    @IBOutlet weak var btnDone: UIButton!
-    
-    
+    @IBOutlet var picker: UIPickerView!
+    @IBOutlet var btnInterval: UIButton!
+    @IBOutlet var tfApiKey: UITextField!
+
+    @IBOutlet var labelInfo: UILabel!
+    @IBOutlet var btnFunctionType: UIButton!
+
+    @IBOutlet var btnDone: UIButton!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.loadData()
-        self.picker.delegate = self
-        self.picker.dataSource = self
+        loadData()
+        picker.delegate = self
+        picker.dataSource = self
         // Do any additional setup after loading the view.
     }
-    
+
     func loadData() {
-        self.tfApiKey.text = DataManager.shared.loadAPIKEY()
-        self.btnInterval.setTitle(DataManager.shared.getFunctionInterval(), for: .normal)
+        tfApiKey.text = DataManager.shared.loadAPIKEY()
+        btnInterval.setTitle(DataManager.shared.getFunctionInterval(), for: .normal)
         if DataManager.shared.isDaily {
-            self.btnFunctionType.setTitle("Daily", for: .normal)
+            btnFunctionType.setTitle("Daily", for: .normal)
         } else {
-            self.btnFunctionType.setTitle("Intraday", for: .normal)
+            btnFunctionType.setTitle("Intraday", for: .normal)
         }
-        
-        self.showPicker(isHidden: true)
+
+        showPicker(isHidden: true)
     }
-    
+
     func showPicker(isHidden: Bool) {
-        self.picker.reloadAllComponents()
-        self.picker.isHidden = isHidden
-        self.btnDone.isHidden = isHidden
-        self.labelInfo.isHidden = isHidden
-        
+        picker.reloadAllComponents()
+        picker.isHidden = isHidden
+        btnDone.isHidden = isHidden
+        labelInfo.isHidden = isHidden
     }
-    
+
     func saveAPIkey() {
-        if let str = self.tfApiKey.text {
+        if let str = tfApiKey.text {
             if str.count > 0 {
                 DataManager.shared.saveAPIKEYToKeyChain(str: str)
             }
         }
     }
-    
+
     @IBAction func actionButton(_ sender: Any) {
         if let btn = sender as? UIButton {
-            if btn == self.btnDone {
-                self.showPicker(isHidden: true)
+            if btn == btnDone {
+                showPicker(isHidden: true)
             }
-            
-            if btn == self.btnInterval {
-                self.presenter?.isInterval = true
-                self.showPicker(isHidden: false)
-                self.labelInfo.text = "Please Select interval duration"
+
+            if btn == btnInterval {
+                presenter?.isInterval = true
+                showPicker(isHidden: false)
+                labelInfo.text = "Please Select interval duration"
             }
-            
-            if btn == self.btnFunctionType {
-                self.presenter?.isInterval = false
-                self.showPicker(isHidden: false)
-                self.labelInfo.text = "Please Select function type"
+
+            if btn == btnFunctionType {
+                presenter?.isInterval = false
+                showPicker(isHidden: false)
+                labelInfo.text = "Please Select function type"
             }
         }
-        
     }
-    
-    @IBAction func editingDone(_ sender: Any) {
-        self.saveAPIkey()
+
+    @IBAction func editingDone(_: Any) {
+        saveAPIkey()
     }
-    
-    @IBAction func textValueChanged(_ sender: Any) {
-        
-    }
-    
+
+    @IBAction func textValueChanged(_: Any) {}
 }
 
 extension VCScreen3: UIPickerViewDelegate, UIPickerViewDataSource {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-       return 1
+    func numberOfComponents(in _: UIPickerView) -> Int {
+        return 1
     }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if self.presenter!.isInterval {
-            return self.presenter!.arrInterval.count
+
+    func pickerView(_: UIPickerView, numberOfRowsInComponent _: Int) -> Int {
+        if presenter!.isInterval {
+            return presenter!.arrInterval.count
         } else {
-            return self.presenter!.arrType.count
+            return presenter!.arrType.count
         }
     }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if self.presenter!.isInterval {
-            DataManager.shared.saveInterval(str: self.presenter!.arrInterval[row])
-            if let str = self.presenter?.arrInterval[row] {
-                self.btnInterval.setTitle(str, for: .normal)
+
+    func pickerView(_: UIPickerView, didSelectRow row: Int, inComponent _: Int) {
+        if presenter!.isInterval {
+            DataManager.shared.saveInterval(str: presenter!.arrInterval[row])
+            if let str = presenter?.arrInterval[row] {
+                btnInterval.setTitle(str, for: .normal)
             }
-            
+
         } else {
-            if let str = self.presenter?.arrType[row] {
+            if let str = presenter?.arrType[row] {
                 if str == "Daily" {
                     DataManager.shared.saveFunctionType(str: "function=TIME_SERIES_DAILY_ADJUSTED")
                 } else {
                     DataManager.shared.saveFunctionType(str: "function=TIME_SERIES_INTRADAY")
                 }
-                self.btnFunctionType.setTitle(str, for: .normal)
+                btnFunctionType.setTitle(str, for: .normal)
             }
         }
     }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if self.presenter!.isInterval {
-            return self.presenter!.arrInterval[row]
+
+    func pickerView(_: UIPickerView, titleForRow row: Int, forComponent _: Int) -> String? {
+        if presenter!.isInterval {
+            return presenter!.arrInterval[row]
         } else {
-            return self.presenter!.arrType[row]
+            return presenter!.arrType[row]
         }
     }
-    
 }

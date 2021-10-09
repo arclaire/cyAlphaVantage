@@ -8,127 +8,122 @@
 import UIKit
 
 class VCScreen1: UIViewController {
-    
-    @IBOutlet weak var viewNoData: UIView!
-    @IBOutlet weak private var searchBar: UISearchBar!
-    @IBOutlet weak private var viewContainer: UIView!
-    @IBOutlet weak var btnCompare: UIButton!
-    @IBOutlet weak var btnSettings: UIButton!
-    
-    @IBOutlet weak var viewBlur: UIVisualEffectView!
-    @IBOutlet weak var table: UITableView!
-    
-    @IBOutlet weak var tableSearch: UITableView!
-    
-    @IBOutlet weak var activitySearch: UIActivityIndicatorView!
-    @IBOutlet weak var activity: UIActivityIndicatorView!
-    
-    
-    @IBOutlet weak var consTableBottomToSuperview: NSLayoutConstraint!
+    @IBOutlet var viewNoData: UIView!
+    @IBOutlet private var searchBar: UISearchBar!
+    @IBOutlet private var viewContainer: UIView!
+    @IBOutlet var btnCompare: UIButton!
+    @IBOutlet var btnSettings: UIButton!
+
+    @IBOutlet var viewBlur: UIVisualEffectView!
+    @IBOutlet var table: UITableView!
+
+    @IBOutlet var tableSearch: UITableView!
+
+    @IBOutlet var activitySearch: UIActivityIndicatorView!
+    @IBOutlet var activity: UIActivityIndicatorView!
+
+    @IBOutlet var consTableBottomToSuperview: NSLayoutConstraint!
     var presenter: PScreen1?
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.searchBar.delegate = self
-        self.registerKeyboardNotifications()
-        self.setupTableView()
-        self.presenter?.loadDataSymbolDetail(str: "IBM")
+        searchBar.delegate = self
+        registerKeyboardNotifications()
+        setupTableView()
+        presenter?.loadDataSymbolDetail(str: "IBM")
         // Do any additional setup after loading the view.
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self)
     }
-    
+
     @IBAction func actionButton(_ sender: Any) {
         if let btn = sender as? UIButton {
-            if btn == self.btnCompare {
-                self.goToCompare()
+            if btn == btnCompare {
+                goToCompare()
             }
-            
-            if btn == self.btnSettings {
-                self.goToSettings()
+
+            if btn == btnSettings {
+                goToSettings()
             }
         }
     }
-    
+
     private func goToCompare() {
-        self.presenter?.navigateToCompare()
+        presenter?.navigateToCompare()
     }
-    
+
     private func goToSettings() {
-        self.presenter?.navigateToSettings()
+        presenter?.navigateToSettings()
     }
-    
+
     private func setupTableView() {
         let nibToRegister = UINib(nibName: String(describing: CellTableSingleInfo.self), bundle: nil)
-        self.table.register(nibToRegister, forCellReuseIdentifier: String(describing: CellTableSingleInfo.self))
-        
-        
-        self.table.delegate = self
-        self.table.dataSource = self
-        self.table.separatorStyle = UITableViewCell.SeparatorStyle.singleLine
-        self.table.separatorInset = .zero
-        
-        self.table.contentInsetAdjustmentBehavior = .never
-        self.table.contentOffset = CGPoint.zero
-        
+        table.register(nibToRegister, forCellReuseIdentifier: String(describing: CellTableSingleInfo.self))
+
+        table.delegate = self
+        table.dataSource = self
+        table.separatorStyle = UITableViewCell.SeparatorStyle.singleLine
+        table.separatorInset = .zero
+
+        table.contentInsetAdjustmentBehavior = .never
+        table.contentOffset = CGPoint.zero
+
         let nibToRegister2 = UINib(nibName: String(describing: CellTableSearchSymbol.self), bundle: nil)
-        self.tableSearch.register(nibToRegister2, forCellReuseIdentifier: String(describing: CellTableSearchSymbol.self))
-        
-        self.tableSearch.delegate = self
-        self.tableSearch.dataSource = self
-        self.tableSearch.separatorStyle = UITableViewCell.SeparatorStyle.singleLine
-        self.tableSearch.separatorInset = .zero
-        
-        self.tableSearch.contentOffset = CGPoint.zero
-        self.tableSearch.isHidden = true
-        
+        tableSearch.register(nibToRegister2, forCellReuseIdentifier: String(describing: CellTableSearchSymbol.self))
+
+        tableSearch.delegate = self
+        tableSearch.dataSource = self
+        tableSearch.separatorStyle = UITableViewCell.SeparatorStyle.singleLine
+        tableSearch.separatorInset = .zero
+
+        tableSearch.contentOffset = CGPoint.zero
+        tableSearch.isHidden = true
     }
-    
+
     func displayLoading(isLoading: Bool) {
-        self.tableSearch.isHidden = true
+        tableSearch.isHidden = true
         if isLoading {
-            self.viewBlur.isHidden = false
-            self.activity.startAnimating()
+            viewBlur.isHidden = false
+            activity.startAnimating()
         } else {
-            self.viewBlur.isHidden = true
-            self.activity.stopAnimating()
+            viewBlur.isHidden = true
+            activity.stopAnimating()
         }
-        
-        self.viewNoData.isHidden = true
-        if let data = self.presenter?.arrModel {
+
+        viewNoData.isHidden = true
+        if let data = presenter?.arrModel {
             if data.count < 1 {
-                self.viewNoData.isHidden = false
+                viewNoData.isHidden = false
             }
         }
     }
-    
+
     func displayLoadingSearch(isLoading: Bool) {
         if isLoading {
-            self.activitySearch.isHidden = false
-            self.activitySearch.startAnimating()
+            activitySearch.isHidden = false
+            activitySearch.startAnimating()
         } else {
-            self.activitySearch.isHidden = true
-            self.activitySearch.stopAnimating()
+            activitySearch.isHidden = true
+            activitySearch.stopAnimating()
         }
     }
-    
-    func reloadUI(){
-        self.viewNoData.isHidden = false
-        if let data = self.presenter?.arrModel {
+
+    func reloadUI() {
+        viewNoData.isHidden = false
+        if let data = presenter?.arrModel {
             if data.count > 0 {
-                self.viewNoData.isHidden = true
-                self.table.reloadData()
+                viewNoData.isHidden = true
+                table.reloadData()
             }
         }
-        
     }
-    
+
     func reloadUISearch() {
-        self.tableSearch.reloadData()
+        tableSearch.reloadData()
     }
-    
+
     func registerKeyboardNotifications() {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(keyboardWillShow(notification:)),
@@ -139,113 +134,102 @@ class VCScreen1: UIViewController {
                                                name: UIResponder.keyboardWillHideNotification,
                                                object: nil)
     }
-    
-    
+
     @objc func keyboardWillShow(notification: NSNotification) {
         let userInfo: NSDictionary = notification.userInfo! as NSDictionary
         let keyboardInfo = userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue
         let keyboardSize = keyboardInfo.cgRectValue.size
-        //let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height + 30, right: 0)
-        self.consTableBottomToSuperview.constant = -keyboardSize.height
+        // let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height + 30, right: 0)
+        consTableBottomToSuperview.constant = -keyboardSize.height
     }
-    
-    @objc func keyboardWillHide(notification: NSNotification) {
-        self.consTableBottomToSuperview.constant = 0
+
+    @objc func keyboardWillHide(notification _: NSNotification) {
+        consTableBottomToSuperview.constant = 0
     }
-    
 }
 
 extension VCScreen1: UISearchBarDelegate {
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        self.tableSearch.isHidden = true
+    func searchBarCancelButtonClicked(_: UISearchBar) {
+        tableSearch.isHidden = true
     }
-    
-    func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        
+
+    func searchBar(_: UISearchBar, shouldChangeTextIn _: NSRange, replacementText _: String) -> Bool {
         return true
     }
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+
+    func searchBar(_: UISearchBar, textDidChange searchText: String) {
         if searchText.count > 0 {
             print("Call Services")
-            self.tableSearch.isHidden = false
-            self.presenter?.loadSearch(str: searchText)
+            tableSearch.isHidden = false
+            presenter?.loadSearch(str: searchText)
         } else {
-            self.tableSearch.isHidden = true
+            tableSearch.isHidden = true
         }
     }
 }
 
 extension VCScreen1: UITableViewDelegate, UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in _: UITableView) -> Int {
         return 1
     }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection _: Int) -> Int {
         var intCount = 0
-        if tableView == self.table {
-            if let total = self.presenter?.arrModel.count {
+        if tableView == table {
+            if let total = presenter?.arrModel.count {
                 intCount = total
             }
         } else {
-            if let total = self.presenter?.arrSymbol.bestMatches?.count {
+            if let total = presenter?.arrSymbol.bestMatches?.count {
                 intCount = total
             }
         }
-        
+
         return intCount
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if tableView == self.table {
+        if tableView == table {
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CellTableSingleInfo.self)) as! CellTableSingleInfo
-            if let data = self.presenter?.arrModel[indexPath.row] {
+            if let data = presenter?.arrModel[indexPath.row] {
                 cell.displayData(data: data)
             }
-            
+
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: CellTableSearchSymbol.self)) as! CellTableSearchSymbol
-            if let data = self.presenter?.arrSymbol.bestMatches {
+            if let data = presenter?.arrSymbol.bestMatches {
                 cell.displayData(data: data[indexPath.row])
             }
-            
+
             return cell
         }
-        
-        
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //self.eventHandler?.goToDetail(index: indexPath.row)
-        if tableView == self.tableSearch {
-            if let data = self.presenter?.arrSymbol.bestMatches {
+        // self.eventHandler?.goToDetail(index: indexPath.row)
+        if tableView == tableSearch {
+            if let data = presenter?.arrSymbol.bestMatches {
                 print("Selected Symbol", data[indexPath.row].symbol!)
-                self.presenter?.loadDataSymbolDetail(str: data[indexPath.row].symbol!)//loadSearch(str: data[indexPath.row].symbol!)
-                self.searchBar.text = data[indexPath.row].symbol!
-                self.searchBar.resignFirstResponder()
-                
+                presenter?.loadDataSymbolDetail(str: data[indexPath.row].symbol!) // loadSearch(str: data[indexPath.row].symbol!)
+                searchBar.text = data[indexPath.row].symbol!
+                searchBar.resignFirstResponder()
             }
-            
         }
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+
+    func tableView(_ tableView: UITableView, heightForRowAt _: IndexPath) -> CGFloat {
         var height: CGFloat = 0.0
         if tableView == table {
-            if let pH = self.presenter?.heightTableRow {
+            if let pH = presenter?.heightTableRow {
                 height = pH
             }
         } else {
-            if let pH = self.presenter?.heightTableSearch {
+            if let pH = presenter?.heightTableSearch {
                 height = pH
             }
         }
-        
+
         return height
     }
-    
-    
 }

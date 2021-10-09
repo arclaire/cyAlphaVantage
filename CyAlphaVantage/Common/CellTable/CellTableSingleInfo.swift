@@ -8,33 +8,31 @@
 import UIKit
 
 class CellTableSingleInfo: UITableViewCell {
+    @IBOutlet var labelValueLow: UILabel!
+    @IBOutlet var labelValueHigh: UILabel!
+    @IBOutlet var labelValueOpen: UILabel!
 
-    @IBOutlet weak var labelValueLow: UILabel!
-    @IBOutlet weak var labelValueHigh: UILabel!
-    @IBOutlet weak var labelValueOpen: UILabel!
-    
-    @IBOutlet weak var labelHour: UILabel!
-    @IBOutlet weak var labelDate: UILabel!
+    @IBOutlet var labelHour: UILabel!
+    @IBOutlet var labelDate: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        self.selectionStyle = .none
+        selectionStyle = .none
     }
-    
+
     func displayData(data: ModelSymbolDetail) {
-        self.selectionStyle = .none
+        selectionStyle = .none
         if DataManager.shared.isDaily {
-            self.labelDate.text = data.formatDate2()
-            self.labelHour.text = ""
+            labelDate.text = data.formatDate2()
+            labelHour.text = ""
         } else {
-            self.labelDate.text = data.formatDate()
-            self.labelHour.text = data.formatHour()
+            labelDate.text = data.formatDate()
+            labelHour.text = data.formatHour()
         }
-       
-        self.labelValueLow.text = data.low
-        self.labelValueHigh.text = data.high
-        self.labelValueOpen.text = data.open
-        
+
+        labelValueLow.text = data.low
+        labelValueHigh.text = data.high
+        labelValueOpen.text = data.open
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -42,5 +40,4 @@ class CellTableSingleInfo: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
 }

@@ -5,11 +5,10 @@
 //  Created by Lucy on 15/01/21.
 //
 
-import XCTest
 @testable import CyAlphaVantage
+import XCTest
 
 class CyAlphaVantageTests: XCTestCase {
-
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
@@ -25,38 +24,37 @@ class CyAlphaVantageTests: XCTestCase {
 
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
-        self.measure {
+        measure {
             // Put the code you want to measure the time of here.
         }
     }
-    
+
     func testCallFetchSearchSymbol() {
         let interactor = IScreen1()
         let str = "IBM"
-        interactor.fetchSearchData(str: str, completionHandler: { (model) -> Void in
-            if let _ =  model.bestMatches {
+        interactor.fetchSearchData(str: str, completionHandler: { model -> Void in
+            if let _ = model.bestMatches {
                 XCTAssert(true, "Call API success and retrieve response with valid model")
-                
+
             } else {
                 XCTAssert(false, "Model not retrieve")
             }
         })
-            
     }
-    
+
     func testCallFetchSymbolDetail() {
         let interactor = IScreen1()
         let str = "IBM"
-        interactor.fetchDefaultData(strSymbol: str, completionHandler: { (model) -> Void in
+        interactor.fetchDefaultData(strSymbol: str, completionHandler: { model -> Void in
             if model.count > 0 {
                 XCTAssert(true, "Call API success and retrieve response with valid model")
-                
+
             } else {
                 XCTAssert(false, "Model not retrieve")
             }
         })
     }
-    
+
     func testDataSave() {
         let strInterval = "10mins"
         DataManager.shared.saveInterval(str: strInterval)
@@ -72,3 +70,5 @@ class CyAlphaVantageTests: XCTestCase {
         }
     }
 }
+
+"Error\(input)"
